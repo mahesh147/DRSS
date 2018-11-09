@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class Account(models.Model):
+    contact_number = models.IntegerField()
+    email_id = models.EmailField()
