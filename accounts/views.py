@@ -34,3 +34,13 @@ def login(request):
             return render(request, 'accounts/login.html', {'error': 'Username or password is incorrect'})
     else:
         return render(request, 'accounts/login.html')
+
+
+def logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        return redirect('home')
+
+
+@login_required(login_url="/accounts/signup")
+def dashboard(request):
