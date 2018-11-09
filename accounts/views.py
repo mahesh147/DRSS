@@ -44,3 +44,4 @@ def logout(request):
 
 @login_required(login_url="/accounts/signup")
 def dashboard(request):
+    return render(request, 'accounts/dashboard.html')
