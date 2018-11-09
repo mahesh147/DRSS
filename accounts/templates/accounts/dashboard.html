@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+
+<a
+    class="nav-item nav-link"
+    href="javascript:{document.getElementById('logout').submit()}"
+>
+    Logout
+</a>
+<form id="logout" method="POST" action="{% url 'logout' %}">
+    {% csrf_token %} <input type="hidden" />
+</form>
+
+<br />
+<h2>Creating new Relief Center</h2>
+<h2>Manage an existing Relief Center</h2>
+
+{% endblock %}
