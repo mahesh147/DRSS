@@ -1,1 +1,42 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Create Relief Centers</h1>
+
+<a href={%url 'dashboard'%}>Return to dashboard</a>
+
+
+<h1>Create</h1>
+<br />
+{% if error %}
+<h3>{{error}}</h3>
+{% endif %}
+
+<br />
+
+<form method="POST" action="{% url 'create'%}">
+
+    {% csrf_token %}
+    Location of Relief Camp:
+    <br />
+    <input type="textbody" name="location" />
+
+    <br />
+    Contact Number:
+    <br />
+    <input type="text" name="contact" />
+    <br />
+    <br />
+    Type of Disaster Occured:
+    <br />
+    <input type="text" name="disaster" />
+    <br />
+    <button type="submit">Create relief</button>
+</form>
+
+
+</form>
+
+
+{% endblock %}
