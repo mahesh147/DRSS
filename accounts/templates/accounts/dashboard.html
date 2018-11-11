@@ -21,6 +21,7 @@
 <a href="{%url 'update' relief_center.id %}">Update </a>
 <a href="{%url 'view' relief_center.id %}">View</a>
 <a href="{% url 'delete' relief_center.id%}">Delete</a>
+<a href="{% url 'wanted_item_create' relief_center.id%}">Manage Wanted Items</a>
 
 
 {% endfor %}

@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Update Wanted Items</h1>
+
+<a href={%url 'dashboard'%}>Return to dashboard</a>
+
+
+<h1>Create</h1>
+<br />
+{% if error %}
+<h3>{{error}}</h3>
+{% endif %}
+
+<br />
+
+<form method="POST" action="{% url 'wanted_item_update' relief_center_id wanted_item.id %}">
+
+    {% csrf_token %}
+    Item Name:
+    <br />
+    <input type="textbody" name="name" value="{{wanted_item.item_name}}" />
+
+    <br />
+    Urgency Level
+    <br />
+    <select name="urgency_level">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select> 
+
+    <p>Note: 1 - not urgent, 3 - critically urgent</p>
+    <br />
+    <br />
+    Description
+    <br />
+    <input type="text" name="description" value="{{wanted_item.description}}" />
+    <br />
+    <br />
+    Category
+    <br />
+    <input type="text" name="category" value="{{wanted_item.category}}" />
+    <br />
+    <br />
+    Quantity
+    <br />
+    <input type="text" name="quantity" value="{{wanted_item.quantity}}" />
+    <br />
+    <button type="submit">Update Wanted Item</button>
+</form>
+
+
+</form>
+
+
+{% endblock %}

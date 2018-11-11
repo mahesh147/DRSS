@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'wanted_item.apps.WantedItemConfig',
     'relief_center.apps.ReliefCenterConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',

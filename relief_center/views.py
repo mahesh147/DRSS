@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . models import ReliefCenter
+from wanted_item.models import WantedItem
 
 
 @login_required(login_url="/accounts/signup")
@@ -27,8 +28,10 @@ def create(request):
 @login_required(login_url="/accounts/signup")
 def view(request, relief_center_id):
     relief_center = get_object_or_404(ReliefCenter, pk=relief_center_id)
+    wanted_items = WantedItem.objects.all().filter(relief_center_id=relief_center.id)
+    print(wanted_items)
     if request.user == relief_center.admin:
-        return render(request, 'relief_center/view.html', {'relief_center': relief_center})
+        return render(request, 'relief_center/view.html', {'relief_center': relief_center, 'wanted_items': wanted_items})
     else:
         return redirect('dashboard')
 

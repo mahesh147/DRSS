@@ -5,4 +5,20 @@
 <h3>Relief Center Location: {{ relief_center.location }}</h3>
 <h3>Total donations recieved: {{ relief_center.donation_received }}</h3>
 
-{% endblock %}
+<h2>Wanted Items in Relief Center</h2>
+
+{% for wanted_item in wanted_items.all%}
+<ul>
+    <li>{{ wanted_item.item_name }}</li>
+    <li>Urgency Level : {{ wanted_item.urgency_level }}</li>
+    <li>{{ wanted_item.description }}</li>
+    <li>{{ wanted_item.category }}</li>
+    <li>{{ wanted_item.quantity }}</li>
+    <a href="{% url 'wanted_item_update' relief_center.id wanted_item.id %}"
+        >Update</a
+    >
+    <a href="{% url 'wanted_item_delete' relief_center.id wanted_item.id %}"
+        >Delete {{ wanted_item.id }} {{ relief_center.id }}</a
+    >
+</ul>
+{%endfor%} {% endblock %}
