@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import auth
 
+from relief_center.models import ReliefCenter
+
 
 def signup(request):
 
@@ -45,4 +47,6 @@ def logout(request):
 
 @login_required(login_url="/accounts/signup")
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    relief_centers = ReliefCenter.objects.all().filter(admin=request.user)
+    print('Relief center = ' + str(relief_centers))
+    return render(request, 'accounts/dashboard.html', {'relief_centers': relief_centers})
