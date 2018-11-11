@@ -12,6 +12,17 @@
 
 <br />
 <a href={% url 'create' %}>Create a new relief center</a>
-<h2>Manage an existing Relief Center</h2>
+
+
+<h3>Your relief centers</h3>
+
+{% for relief_center in relief_centers.all %}
+<h4>Relief Center in {{relief_center.location}}</h4>
+<a href="{%url 'update' relief_center.id %}">Update </a>
+<a href="{%url 'view' relief_center.id %}">View</a>
+<a href="{% url 'delete' relief_center.id%}">Delete</a>
+
+
+{% endfor %}
 
 {% endblock %}

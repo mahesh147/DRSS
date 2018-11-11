@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Are you sure you want to delete this relief center</h1>
+<a
+    href="javascript:{document.getElementById('delete{{relief_center.id}}').submit()}"
+>
+    <button>Yes</button>
+</a>
+<form
+    id="delete{{relief_center.id}}"
+    method="POST"
+    action="{% url 'delete' relief_center.id %}"
+>
+    {% csrf_token %} <input type="hidden" />
+</form>
+
+<a href="{% url 'dashboard'%}">No, take me back</a> {% endblock %}

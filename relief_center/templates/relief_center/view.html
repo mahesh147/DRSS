@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<a href="{%url 'dashboard' %}">Go back to dashboard</a>
+<h1>Details:</h1>
+<h3>Contact Number: {{ relief_center.contact }}</h3>
+<h3>Relief Center Location: {{ relief_center.location }}</h3>
+<h3>Total donations recieved: {{ relief_center.donation_received }}</h3>
+
+{% endblock %}
