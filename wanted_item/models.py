@@ -8,5 +8,7 @@ class WantedItem(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=50)
     quantity = models.IntegerField()
-    relief_center_id = models.ForeignKey(
-        ReliefCenter, on_delete=models.CASCADE)
+    relief_center_id = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.item_name
