@@ -1,24 +1,53 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 
-<h1>Signup</h1>
-<br />
-<br />
-{% if error %}
-<h3>{{ error }}</h3>
-{% endif %} <br />
-<br />
-<form method="POST" action="{% url 'signup'%}">
-    {% csrf_token %} Username: <br />
-    <input type="text" name="username" />
+{% block content %}
 
-    <br />
-    Password: <br />
-    <input type="password" name="password1" /> <br />
 
-    Confirm Password: <br />
-    <input type="password" name="password2" /> <br />
-    <br />
-    <button type="submit">Submit</button>
-</form>
+<style>
+.btn{
+    align-self: center;
+    text-align: center;
+}
+.title{
+    align-self: center;
+}
 
+.card{
+    padding-top: 20px;
+    margin-top: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    padding-bottom:50px;
+}
+
+.card-container{
+    display: flex;
+    justify-content: center;
+}
+</style>
+<div class="card">
+        <h3 class="title">Admin Signup</h3>
+        <hr>
+        <div class="card-container">
+            <form method="POST" action="{% url 'signup'%}">
+                    <div class="form-group">
+                            <label for="usernameinput" class="bmd-label-floating">{% csrf_token %} Username</label>
+                            <input type="text" class="form-control" name="username" id="usernameinput">
+                        </div>
+                    <div class="form-group">
+                                <label for="passwordinput" class="bmd-label-floating">Password</label>
+                                <input type="password" name="password1" class="form-control" id="passwordinput">
+                            </div>
+                    <div class="form-group">
+                                <label for="passwordinput2" class="bmd-label-floating">Confirm Password</label>
+                                <input type="password" name="password2" class="form-control" id="passwordinput2">
+                            </div>
+                    <button type="submit" class="btn btn-secondary btn-raised">Log in</button>
+                    {% if error %}
+                    <h4 class="bmd-help">{{error}</h4>
+                    {% endif %}
+                    </form>
+                </div>
+        <p class="title">Looking forward to contribute to relief camps? <a href={% url 'signup' %}>login as user</a> then.</p>
+    </div>
 {% endblock %}
