@@ -42,12 +42,12 @@
                                 <label for="passwordinput2" class="bmd-label-floating">Confirm Password</label>
                                 <input type="password" name="password2" class="form-control" id="passwordinput2">
                             </div>
-                    <button type="submit" class="btn btn-secondary btn-raised">Log in</button>
+                    <button type="submit" class="btn btn-secondary btn-raised">Signup</button>
                     {% if error %}
                     <h4 class="bmd-help">{{error}</h4>
                     {% endif %}
                     </form>
                 </div>
-        <p class="title">Looking forward to contribute to relief camps? <a href={% url 'signup' %}>login as user</a> then.</p>
+        <p class="title">Looking forward to contribute to relief camps? <a href={% url 'login' %}>login as user</a> then.</p>
     </div>
 {% endblock %}
