@@ -1,24 +1,96 @@
 {% extends 'base.html' %} {% block content %}
-<a href="{%url 'dashboard' %}">Go back to dashboard</a>
-<h1>Details:</h1>
-<h3>Contact Number: {{ relief_center.contact }}</h3>
-<h3>Relief Center Location: {{ relief_center.location }}</h3>
-<h3>Total donations recieved: {{ relief_center.donation_received }}</h3>
+<style>
+    .card-container {
+        justify-content: center;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    .btn-danger {
+        width: 100px;
+    }
+    .btn-primary {
+        width: 100px;
+    }
+    .inner-card {
+        margin-left: 300px;
+        margin-right: 300px;
+        padding: 20px;
+    }
+    .form-container {
+        margin-right: 100px;
+        margin-left: 100px;
+    }
+</style>
+<div class="card">
+    <div class="card-container">
+        <div style="float:right;">
+            <form id="logout" method="POST" action="{% url 'logout' %}">
+                <button
+                    class="btn btn-raised btn-danger"
+                    href="javascript:{document.getElementById('logout').submit()}"
+                >
+                    Log out</button
+                ><br />
+                {% csrf_token %}
+            </form>
+        </div>
+        <div>
+            <h3>Relief Center Details</h3>
+            <hr />
+        </div>
+        <div>
+            <a class="btn" href="{%url 'dashboard'%}">Return to dashboard</a>
+        </div>
+        <div>
+            <h5 class="lead">Contact Number: {{ relief_center.contact }}</h5>
+            <h5 class="lead">
+                Relief Center Location: {{ relief_center.location }}
+            </h5>
+            <h5 class="lead">
+                Total donations recieved: {{ relief_center.donation_received }}
+            </h5>
+        </div>
+        <hr />
+        <div><h3>Wanted Items in Relief Center</h3></div>
+        <div>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Item name</th>
+                        <th scope="col">Urgency level</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
 
-<h2>Wanted Items in Relief Center</h2>
-
-{% for wanted_item in wanted_items.all%}
-<ul>
-    <li>{{ wanted_item.item_name }}</li>
-    <li>Urgency Level : {{ wanted_item.urgency_level }}</li>
-    <li>{{ wanted_item.description }}</li>
-    <li>{{ wanted_item.category }}</li>
-    <li>{{ wanted_item.quantity }}</li>
-    <a href="{% url 'wanted_item_update' relief_center.id wanted_item.id %}"
-        >Update</a
-    >
-    <a href="{% url 'wanted_item_delete' relief_center.id wanted_item.id %}"
-        >Delete {{ wanted_item.id }} {{ relief_center.id }}</a
-    >
-</ul>
-{%endfor%} {% endblock %}
+                <tbody>
+                    {% for wanted_item in wanted_items.all%}
+                    <tr>
+                        <th scope="col">{{ wanted_item.item_name }}</th>
+                        <th scope="col">{{ wanted_item.urgency_level }}</th>
+                        <th scope="col">{{ wanted_item.description }}</th>
+                        <th scope="col">{{ wanted_item.category }}</th>
+                        <th scope="col">{{ wanted_item.quantity }}</th>
+                        <th scope="col">
+                            <a
+                                class="btn btn-raised"
+                                href="{% url 'wanted_item_update' relief_center.id wanted_item.id %}"
+                                >Update</a
+                            >
+                            <a
+                                class="btn btn-raised"
+                                href="{% url 'wanted_item_delete' relief_center.id wanted_item.id %}"
+                                >Delete</a
+                            >
+                        </th>
+                    </tr>
+                </tbody>
+                {%endfor%}
+                <hr />
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
