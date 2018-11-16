@@ -1,29 +1,59 @@
+
 {% extends 'base.html' %} {% block content %}
+<style>
+.card-container{
 
-<a
-    class="nav-item nav-link"
-    href="javascript:{document.getElementById('logout').submit()}"
->
-    Logout
-</a>
-<form id="logout" method="POST" action="{% url 'logout' %}">
-    {% csrf_token %} <input type="hidden" />
-</form>
+    justify-content: center;
+    padding:20px;
+    flex-wrap: wrap;
+}
+.btn-danger{
+    width:100px;
+}
+.btn-primary{
+    width: 100px;
+}
+.inner-card{
+    margin-left: 10px;
+    margin-right: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 10px;
+}
+</style>
 
-<br />
-<a href={% url 'create' %}>Create a new relief center</a>
+<div class="card">
+        <div class="card-container">
+        <div style="float:right;">
+        <form id="logout" method="POST" action="{% url 'logout' %}">
+        <button class="btn btn-raised btn-danger" href="javascript:{document.getElementById('logout').submit()}">Log out</button><br>
+        {% csrf_token %}
+        </form>
+        </div>
+        <div>
+      <h3>Relief Centers</h3><hr>
+        </div>
+        <div>
+        <a class="btn btn-secondary btn-raised" href={% url 'create' %}>Create a new relief center</a>
+        </div>
+        <div class="card inner-card">
+                {% for relief_center in relief_centers.all %}
+        <div>
+        
+          <h4>Relief Center in {{relief_center.location}}</h4>
+          
+        </div>
+        <div>
+        <a class="btn btn-raised" href="{%url 'update' relief_center.id %}">Update </a>
+      <a class="btn btn-raised" href="{%url 'view' relief_center.id %}">View</a>
+      <a class="btn btn-raised" href="{% url 'delete' relief_center.id%}">Delete</a>
+      <a class="btn btn-raised" href="{% url 'wanted_item_create' relief_center.id%}">Create Wanted Items</a>
+        </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+    </div>
 
-
-<h3>Your relief centers</h3>
-
-{% for relief_center in relief_centers.all %}
-<h4>Relief Center in {{relief_center.location}}</h4>
-<a href="{%url 'update' relief_center.id %}">Update </a>
-<a href="{%url 'view' relief_center.id %}">View</a>
-<a href="{% url 'delete' relief_center.id%}">Delete</a>
-<a href="{% url 'wanted_item_create' relief_center.id%}">Manage Wanted Items</a>
-
-
-{% endfor %}
 
 {% endblock %}

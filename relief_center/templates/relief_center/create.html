@@ -1,42 +1,86 @@
+relief_center/create.html {% extends 'base.html' %} {% block content %}
+<style>
+    .card-container {
+        justify-content: center;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    .btn-danger {
+        width: 100px;
+    }
+    .btn-primary {
+        width: 100px;
+    }
+    .inner-card {
+        margin-left: 300px;
+        margin-right: 300px;
+        padding: 20px;
+    }
+    .form-container {
+        margin-right: 100px;
+        margin-left: 100px;
+    }
+</style>
 
-{% extends 'base.html' %}
+<div class="card">
+    <div class="card-container">
+        <div style="float:right;">
+            <form id="logout" method="POST" action="{% url 'logout' %}">
+                <button
+                    class="btn btn-raised btn-danger"
+                    href="javascript:{document.getElementById('logout').submit()}"
+                >
+                    Log out</button
+                ><br />
+                {% csrf_token %}
+            </form>
+        </div>
+        <div>
+            <h3>Create Relief Centers</h3>
+            <hr />
+        </div>
+        <div>
+            <a class="btn" href="{%url 'dashboard'%}">Return to dashboard</a>
+        </div>
+        <div class="card inner-card">
+            <div>
+                <h3><center>Create</center></h3>
+                <hr />
+            </div>
+            <div class="form-container">
+                <form method="POST" action="{% url 'create'%}">
+                    <label class="bmd-label-floating">
+                        {% csrf_token %} Location of Relief Camp:
+                    </label>
 
-{% block content %}
-<h1>Create Relief Centers</h1>
+                    <input
+                        type="textbody"
+                        name="location"
+                        class="form-control"
+                    />
 
-<a href={%url 'dashboard'%}>Return to dashboard</a>
-
-
-<h1>Create</h1>
-<br />
-{% if error %}
-<h3>{{error}}</h3>
-{% endif %}
-
-<br />
-
-<form method="POST" action="{% url 'create'%}">
-
-    {% csrf_token %}
-    Location of Relief Camp:
-    <br />
-    <input type="textbody" name="location" />
-
-    <br />
-    Contact Number:
-    <br />
-    <input type="text" name="contact" />
-    <br />
-    <br />
-    Type of Disaster Occured:
-    <br />
-    <input type="text" name="disaster" />
-    <br />
-    <button type="submit">Create relief</button>
-</form>
-
-
-</form>
-
-
+                    <br />
+                    <label class="bmd-label-floating">Contact Number:</label>
+                    <input type="text" name="contact" class="form-control" />
+                    <br />
+                    <label class="bmd-label-floating"
+                        >Type of Disaster Occured:</label
+                    >
+                    <input type="text" name="disaster" class="form-control" />
+                    <br />
+                    <button class="btn btn-secondary btn-raised" type="submit">
+                        Create relief center
+                    </button>
+                </form>
+                <div>
+                    {% if error %}
+                    <span class="badge badge-pill badge-warning">{{
+                        error
+                    }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

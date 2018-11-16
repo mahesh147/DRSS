@@ -1,5 +1,45 @@
 {% extends 'base.html' %} {% block content %}
-
+<style>
+.card-container{
+    display: flex;
+    justify-content: center;
+}
+.card{
+    padding-top: 20px;
+    margin-top: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    padding-bottom: 50px;
+}
+.title{
+    align-self: center;
+}
+.btn{
+    align-self: center;
+    text-align: center;
+}
+</style>
+<div class="card">
+        <h3 class="title">Admin Login</h3>
+        <hr>
+        <div class="card-container">
+            <form method="POST" action="{% url 'login'%}">
+                    <div class="form-group">
+                            <label for="usernameinput" class="bmd-label-floating">{% csrf_token %} Username</label>
+                            <input type="text" class="form-control" name="username" id="usernameinput">
+                          </div>
+                    <div class="form-group">
+                                <label for="passwordinput" class="bmd-label-floating">Password</label>
+                                <input type="password" name="password1" class="form-control" id="passwordinput">
+                              </div>
+                              <button type="submit" class="btn btn-secondary btn-raised">Log in</button>
+                    </form>
+                </div>
+        <p class="title">Looking forward to contribute to relief camps? <a href={% url 'signup' %}>login as user</a> then.</p>
+    </div>
+    {% endblock %}
+<!--MODIFIED CODE-->
+<!--
 <h1>Login</h1>
 <br />
 <br />
@@ -19,5 +59,5 @@
 </form>
 
 <a href={% url 'signup' %}>Don't have an account yet? Sign up for one!</a>
+-->
 
-{% endblock %}

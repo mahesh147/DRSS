@@ -1,16 +1,51 @@
-{% extends 'base.html' %} {% block content %}
-<h1>Are you sure you want to delete this relief center</h1>
-<a
-    href="javascript:{document.getElementById('delete{{relief_center.id}}').submit()}"
->
-    <button>Yes</button>
-</a>
-<form
-    id="delete{{relief_center.id}}"
-    method="POST"
-    action="{% url 'delete' relief_center.id %}"
->
-    {% csrf_token %} <input type="hidden" />
-</form>
+relief_center/delete.html {% extends 'base.html' %} {% block content %}
+<style>
+    .card-container {
+        justify-content: center;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    .card {
+        margin-left: 300px;
+        margin-right: 300px;
+    }
+    .btn-danger {
+        width: 100px;
+    }
+    .btn-primary {
+        width: 100px;
+    }
+    .inner-card {
+        margin-left: 300px;
+        margin-right: 300px;
+        padding: 20px;
+    }
+    .form-container {
+        margin-right: 100px;
+        margin-left: 100px;
+    }
+</style>
+<div class="card">
+    <div class="card-container">
+        <h3>Are you sure you want to delete this relief center?</h3>
+        <div>
+            <a
+                class="btn btn-danger btn-raised"
+                href="javascript:{document.getElementById('delete{{relief_center.id}}').submit()}"
+                >Yes</a
+            >
+            <a class="btn btn-secondary btn-raised" href="{% url 'dashboard'%}"
+                >No, take me back</a
+            >
+        </div>
+        <form
+            id="delete{{relief_center.id}}"
+            method="POST"
+            action="{% url 'delete' relief_center.id %}"
+        >
+            {% csrf_token %} <input type="hidden" />
+        </form>
+    </div>
+</div>
 
-<a href="{% url 'dashboard'%}">No, take me back</a> {% endblock %}
+{% endblock %}
