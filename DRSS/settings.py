@@ -80,10 +80,12 @@ os.path.join(BASE_DIR, 'db.sqlite3'),
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': os.path.join(BASE_DIR, '.mylogin.cnf'),
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'drss',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
